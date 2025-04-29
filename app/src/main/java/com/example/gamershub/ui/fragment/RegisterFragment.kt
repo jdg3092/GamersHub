@@ -17,4 +17,5 @@ class RegisterFragment: Fragment() {
         binding = FragmentRegisterBinding.inflate(inflater, container, false)
         return binding.root
     }
+    // https://gamershub-5a2e5-default-rtdb.europe-west1.firebasedatabase.app/
 }
