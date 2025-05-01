@@ -17,4 +17,8 @@ class LoginFragment: Fragment() {
         binding = FragmentLoginBinding.inflate(inflater, container, false)
         return binding.root
     }
+
+    override fun onStart() {
+        super.onStart()
+    }
 }
