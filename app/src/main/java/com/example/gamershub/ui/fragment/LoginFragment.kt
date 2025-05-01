@@ -49,6 +49,7 @@ class LoginFragment : Fragment() {
                         .show()
                 }
             }
+
         }
         binding.textRegistro.setOnClickListener {
             findNavController().navigate(R.id.action_loginFragment_to_registerFragment)
