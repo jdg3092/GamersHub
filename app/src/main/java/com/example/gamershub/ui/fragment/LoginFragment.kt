@@ -33,15 +33,20 @@ class LoginFragment : Fragment() {
     override fun onStart() {
         super.onStart()
         binding.btnLogin.setOnClickListener {
-            auth.signInWithEmailAndPassword(
-                binding.editCorreo.text.toString(),
-                binding.editPass.text.toString()
-            ).addOnCompleteListener {
+            val email = binding.editCorreo.text.toString()
+            val password = binding.editPass.text.toString()
+
+            if (email.isEmpty() || password.isEmpty()) {
+                Snackbar.make(binding.root, "Rellena los campos", Snackbar.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+            auth.signInWithEmailAndPassword(email, password).addOnCompleteListener {
                 if (it.isSuccessful) {
                     findNavController().navigate(R.id.action_loginFragment_to_mainFragment)
 
                 } else {
-                    Snackbar.make(binding.root, "Error al iniciar sesión", Snackbar.LENGTH_SHORT).show()
+                    Snackbar.make(binding.root, "Error al iniciar sesión", Snackbar.LENGTH_SHORT)
+                        .show()
                 }
             }
         }
