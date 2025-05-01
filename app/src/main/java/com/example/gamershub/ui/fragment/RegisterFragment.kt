@@ -50,7 +50,7 @@ class RegisterFragment: Fragment() {
                     val currentUser = auth.currentUser
                     val reference = database.reference.child("users").child(currentUser!!.uid)
                     reference.setValue(user)
-                    findNavController().navigate(R.id.action_registerFragment_to_mainFragment)
+                    findNavController().navigate(R.id.action_registerFragment_to_registerDialog)
                 }else{
                     Snackbar.make(binding.root,"Error en el registro",Snackbar.LENGTH_SHORT).show()
                 }

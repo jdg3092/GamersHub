@@ -22,12 +22,24 @@
         android:name="com.example.gamershub.ui.fragment.RegisterFragment"
         android:label="RegisterFragment" >
         <action
-            android:id="@+id/action_registerFragment_to_mainFragment"
-            app:destination="@id/mainFragment" />
+            android:id="@+id/action_registerFragment_to_registerDialog"
+            app:destination="@id/registerDialog" />
     </fragment>
     <fragment
         tools:layout="@layout/fragment_main"
         android:id="@+id/mainFragment"
         android:name="com.example.gamershub.ui.fragment.MainFragment"
         android:label="MainFragment" />
+    <dialog
+        android:id="@+id/registerDialog"
+        android:name="com.example.gamershub.ui.dialog.RegisterDialog"
+        android:label="RegisterDialog"
+        >
+        <action
+            android:id="@+id/action_registerDialog_to_mainFragment"
+            app:destination="@id/mainFragment" />
+        <action
+            android:id="@+id/action_registerDialog_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </dialog>
 </navigation>
