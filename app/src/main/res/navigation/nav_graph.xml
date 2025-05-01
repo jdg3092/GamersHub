@@ -20,7 +20,11 @@
         tools:layout="@layout/fragment_register"
         android:id="@+id/registerFragment"
         android:name="com.example.gamershub.ui.fragment.RegisterFragment"
-        android:label="RegisterFragment" />
+        android:label="RegisterFragment" >
+        <action
+            android:id="@+id/action_registerFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
+    </fragment>
     <fragment
         tools:layout="@layout/fragment_main"
         android:id="@+id/mainFragment"
