@@ -14,16 +14,18 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 
-class RegisterFragment: Fragment() {
+class RegisterFragment : Fragment() {
     private lateinit var binding: FragmentRegisterBinding
-    private lateinit var auth:FirebaseAuth
-    private lateinit var database:FirebaseDatabase
+    private lateinit var auth: FirebaseAuth
+    private lateinit var database: FirebaseDatabase
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
         auth = FirebaseAuth.getInstance()
-        database = FirebaseDatabase.getInstance("https://gamershub-5a2e5-default-rtdb.europe-west1.firebasedatabase.app/")
+        database =
+            FirebaseDatabase.getInstance("https://gamershub-5a2e5-default-rtdb.europe-west1.firebasedatabase.app/")
     }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -43,16 +45,17 @@ class RegisterFragment: Fragment() {
             val telefono = binding.editTelefono.text.toString()
             val direccion = binding.editDireccion.text.toString()
 
-            val user = User(nombre, apellido, correo, pass,  telefono, direccion)
+            val user = User(nombre, apellido, correo, telefono, direccion)
 
-            auth.createUserWithEmailAndPassword(correo,pass).addOnCompleteListener {
-                if (it.isSuccessful){
+            auth.createUserWithEmailAndPassword(correo, pass).addOnCompleteListener {
+                if (it.isSuccessful) {
                     val currentUser = auth.currentUser
                     val reference = database.reference.child("users").child(currentUser!!.uid)
                     reference.setValue(user)
                     findNavController().navigate(R.id.action_registerFragment_to_registerDialog)
-                }else{
-                    Snackbar.make(binding.root,"Error en el registro",Snackbar.LENGTH_SHORT).show()
+                } else {
+                    Snackbar.make(binding.root, "Error en el registro", Snackbar.LENGTH_SHORT)
+                        .show()
                 }
             }
         }

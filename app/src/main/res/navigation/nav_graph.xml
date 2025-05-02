@@ -29,7 +29,11 @@
         tools:layout="@layout/fragment_main"
         android:id="@+id/mainFragment"
         android:name="com.example.gamershub.ui.fragment.MainFragment"
-        android:label="MainFragment" />
+        android:label="MainFragment" >
+        <action
+            android:id="@+id/action_mainFragment_to_profileInfoAccountFragment"
+            app:destination="@id/profileInfoAccountFragment" />
+    </fragment>
     <dialog
         android:id="@+id/registerDialog"
         android:name="com.example.gamershub.ui.dialog.RegisterDialog"
@@ -42,4 +46,13 @@
             android:id="@+id/action_registerDialog_to_loginFragment"
             app:destination="@id/loginFragment" />
     </dialog>
+    <fragment
+        tools:layout="@layout/fragment_profileinfoaccount"
+        android:id="@+id/profileInfoAccountFragment"
+        android:name="com.example.gamershub.ui.fragment.ProfileInfoAccountFragment"
+        android:label="ProfileInfoAccountFragment" >
+        <action
+            android:id="@+id/action_profileInfoAccountFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
+    </fragment>
 </navigation>

@@ -5,10 +5,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
+import com.example.gamershub.R
 import com.example.gamershub.databinding.FragmentMainBinding
 
-class MainFragment:Fragment() {
-    private lateinit var binding : FragmentMainBinding
+class MainFragment : Fragment() {
+    private lateinit var binding: FragmentMainBinding
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -20,6 +22,9 @@ class MainFragment:Fragment() {
 
     override fun onStart() {
         super.onStart()
+        binding.btnVerPerfil.setOnClickListener {
+            findNavController().navigate(R.id.action_mainFragment_to_profileInfoAccountFragment)
+        }
 
     }
 }
