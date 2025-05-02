@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.gamershub.R
@@ -38,6 +39,7 @@ class ProfileInfoAccountFragment : Fragment() {
     override fun onStart() {
         super.onStart()
         binding.toolbarPerfilInfo.inflateMenu(R.menu.menu_perfil)
+        binding.toolbarPerfilInfo.overflowIcon?.setTint(ContextCompat.getColor(requireContext(), R.color.white))
         binding.toolbarPerfilInfo.setOnMenuItemClickListener {
             when(it.itemId){
                 R.id.volverMainFragmnet ->{

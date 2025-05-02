@@ -8,14 +8,14 @@
     android:padding="20dp">
 
     <androidx.appcompat.widget.Toolbar
-        app:title="Mis Datos"
-        app:titleTextColor="@android:color/white"
         android:id="@+id/toolbarPerfilInfo"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:title="Mis Datos"
+        app:titleTextColor="@android:color/white" />
 
     <EditText
         android:id="@+id/editNombre"

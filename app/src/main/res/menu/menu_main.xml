@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/verPerfilInfo"
+        android:title="Informacion del perfil"
+        android:icon="@android:drawable/ic_menu_info_details"
+        app:showAsAction="ifRoom"
+        />
+
+    <item
+        android:id="@+id/cerrarSesion"
+        android:title="Cerrar Sesion"
+        android:icon="@drawable/iconlogout"
+        app:showAsAction="ifRoom" />
+
+</menu>

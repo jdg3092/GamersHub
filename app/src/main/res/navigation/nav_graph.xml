@@ -33,6 +33,9 @@
         <action
             android:id="@+id/action_mainFragment_to_profileInfoAccountFragment"
             app:destination="@id/profileInfoAccountFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
     </fragment>
     <dialog
         android:id="@+id/registerDialog"
