@@ -20,8 +20,8 @@ class RegisterDialog:DialogFragment() {
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val builder: AlertDialog.Builder = AlertDialog.Builder(requireActivity())
-        builder.setTitle("Registro correcto")
-        builder.setMessage("Quieres realizar el registro")
+        builder.setTitle("Registro de usuario correcto")
+        builder.setMessage("Quieres realizar el Login directamente")
         builder.setPositiveButton("SI"){_,_->
             findNavController().navigate(R.id.action_registerDialog_to_mainFragment)
         }

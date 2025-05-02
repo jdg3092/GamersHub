@@ -38,12 +38,12 @@ class RegisterFragment: Fragment() {
         binding.btnRegistrar.setOnClickListener {
             val nombre = binding.editNombre.text.toString()
             val apellido = binding.editApellido.text.toString()
-            val telefono = binding.editTelefono.text.toString()
             val correo = binding.editCorreo.text.toString()
             val pass = binding.editPass.text.toString()
+            val telefono = binding.editTelefono.text.toString()
             val direccion = binding.editDireccion.text.toString()
 
-            val user = User(nombre, apellido, telefono, correo, pass, direccion)
+            val user = User(nombre, apellido, correo, pass,  telefono, direccion)
 
             auth.createUserWithEmailAndPassword(correo,pass).addOnCompleteListener {
                 if (it.isSuccessful){
@@ -58,4 +58,4 @@ class RegisterFragment: Fragment() {
         }
     }
 }
-    // https://gamershub-5a2e5-default-rtdb.europe-west1.firebasedatabase.app/
+
