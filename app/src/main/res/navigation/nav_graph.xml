@@ -57,5 +57,17 @@
         <action
             android:id="@+id/action_profileInfoAccountFragment_to_mainFragment"
             app:destination="@id/mainFragment" />
+        <action
+            android:id="@+id/action_profileInfoAccountFragment_to_changePasswordFragment"
+            app:destination="@id/changePasswordFragment" />
+    </fragment>
+    <fragment
+        tools:layout="@layout/fragment_changepassword"
+        android:id="@+id/changePasswordFragment"
+        android:name="com.example.gamershub.ui.fragment.ChangePasswordFragment"
+        android:label="ChangePasswordFragment" >
+        <action
+            android:id="@+id/action_changePasswordFragment_to_profileInfoAccountFragment"
+            app:destination="@id/profileInfoAccountFragment" />
     </fragment>
 </navigation>

@@ -46,6 +46,11 @@ class ProfileInfoAccountFragment : Fragment() {
                     findNavController().navigate(R.id.action_profileInfoAccountFragment_to_mainFragment)
                     return@setOnMenuItemClickListener true
                 }
+                R.id.cambiarPassword ->{
+                    findNavController().navigate(R.id.action_profileInfoAccountFragment_to_changePasswordFragment)
+                    return@setOnMenuItemClickListener true
+
+                }
             }
             return@setOnMenuItemClickListener true
         }

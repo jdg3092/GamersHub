@@ -4,4 +4,8 @@
         android:id="@+id/volverMainFragmnet"
         android:title="Volver Pantalla Principal" />
 
+    <item
+        android:id="@+id/cambiarPassword"
+        android:title="Cambiar Contraseña" />"
+
 </menu>
