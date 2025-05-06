@@ -13,9 +13,9 @@ import com.example.gamershub.R
 import com.example.gamershub.model.MainOption
 
 class MainOptionAdapter(
-    var context: Context,
-    private val options: List<MainOption>,
-    private val onItemClick: (MainOption) -> Unit
+    val context: Context,
+    val options: List<MainOption>,
+    val onItemClick: (MainOption) -> Unit
 ) : RecyclerView.Adapter<MainOptionAdapter.MyHolder>() {
     inner class MyHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val image = itemView.findViewById<ImageView>(R.id.imgOption)
