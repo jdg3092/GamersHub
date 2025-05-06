@@ -7,8 +7,11 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.gamershub.R
 import com.example.gamershub.databinding.FragmentMainBinding
+import com.example.gamershub.model.MainOption
+import com.example.gamershub.ui.adapter.MainOptionAdapter
 import com.google.firebase.auth.FirebaseAuth
 
 class MainFragment : Fragment() {
@@ -21,6 +24,11 @@ class MainFragment : Fragment() {
     ): View? {
         binding = FragmentMainBinding.inflate(inflater, container, false)
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        configurarRecyclerView()
     }
 
     override fun onStart() {
@@ -42,5 +50,20 @@ class MainFragment : Fragment() {
             return@setOnMenuItemClickListener true
 
         }
+    }
+
+    private fun configurarRecyclerView() {
+        val options = listOf(
+            MainOption("Game Library", R.drawable.ic_game_library, R.id.action_mainFragment_to_gameLibraryFragment),
+            MainOption("Forum", R.drawable.ic_forum, R.id.action_mainFragment_to_forumFragment),
+
+        )
+
+        val adapter = MainOptionAdapter(requireContext(), options) { option ->
+            findNavController().navigate(option.navActionId)
+        }
+
+        binding.recyclerMain.layoutManager = LinearLayoutManager(requireContext())
+        binding.recyclerMain.adapter = adapter
     }
 }

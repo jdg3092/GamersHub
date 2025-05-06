@@ -36,6 +36,12 @@
         <action
             android:id="@+id/action_mainFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_forumFragment"
+            app:destination="@id/forumFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_gameLibraryFragment"
+            app:destination="@id/gameLibraryFragment" />
     </fragment>
     <dialog
         android:id="@+id/registerDialog"
@@ -70,4 +76,14 @@
             android:id="@+id/action_changePasswordFragment_to_profileInfoAccountFragment"
             app:destination="@id/profileInfoAccountFragment" />
     </fragment>
+    <fragment
+        tools:layout="@layout/fragment_forum"
+        android:id="@+id/forumFragment"
+        android:name="com.example.gamershub.ui.fragment.ForumFragment"
+        android:label="ForumFragment" />
+    <fragment
+        tools:layout="@layout/fragment_gamelibrary"
+        android:id="@+id/gameLibraryFragment"
+        android:name="com.example.gamershub.ui.fragment.GameLibraryFragment"
+        android:label="GameLibraryFragment" />
 </navigation>
