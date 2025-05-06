@@ -54,8 +54,8 @@ class MainFragment : Fragment() {
 
     private fun configurarRecyclerView() {
         val options = listOf(
-            MainOption("Game Library", R.drawable.ic_game_library, R.id.action_mainFragment_to_gameLibraryFragment),
-            MainOption("Forum", R.drawable.ic_forum, R.id.action_mainFragment_to_forumFragment),
+            MainOption("Game Library", R.drawable.ic_game_library, R.id.action_mainFragment_to_gameLibraryFragment, R.drawable.bg_game_library),
+            MainOption("Forum", R.drawable.ic_forum, R.id.action_mainFragment_to_forumFragment, R.drawable.bg_forum),
 
         )
 

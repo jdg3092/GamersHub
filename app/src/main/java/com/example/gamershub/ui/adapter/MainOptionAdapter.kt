@@ -5,7 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.gamershub.R
 import com.example.gamershub.model.MainOption
@@ -18,6 +20,8 @@ class MainOptionAdapter(
     inner class MyHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val image = itemView.findViewById<ImageView>(R.id.imgOption)
         val text = itemView.findViewById<TextView>(R.id.textOption)
+        val container = itemView.findViewById<LinearLayout>(R.id.containerItem)
+
 
     }
 
@@ -35,6 +39,8 @@ class MainOptionAdapter(
         holder.text.text = option.title
         holder.image.setImageResource(option.iconResId)
         holder.itemView.setOnClickListener { onItemClick(option) }
+        holder.container.background = ContextCompat.getDrawable(context, option.backgroundResId)
+
 
     }
 }
