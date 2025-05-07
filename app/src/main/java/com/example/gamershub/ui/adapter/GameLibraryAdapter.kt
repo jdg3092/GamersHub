@@ -39,6 +39,6 @@ class GameLibraryAdapter(private val games: List<GameResult>, private val contex
             .into(holder.imgGame)
         Log.d("DEBUG", "Imagen: ${game.backgroundImage}")
         holder.textGameName.text = game.name
-        holder.textReleaseDate.text = game.released
+        holder.textReleaseDate.text = "Lanzamiento: ${game.released ?: "Fecha no disponible"}"
     }
 }
