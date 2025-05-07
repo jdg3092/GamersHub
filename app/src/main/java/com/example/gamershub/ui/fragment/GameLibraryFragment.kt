@@ -1,5 +1,6 @@
 package com.example.gamershub.ui.fragment
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -7,11 +8,27 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.android.volley.toolbox.JsonObjectRequest
+import com.android.volley.toolbox.Volley
 import com.example.gamershub.R
 import com.example.gamershub.databinding.FragmentGamelibraryBinding
+import com.example.gamershub.model.Game
+import com.example.gamershub.model.GameResult
+import com.example.gamershub.ui.adapter.GameLibraryAdapter
+import com.google.android.material.snackbar.Snackbar
+import com.google.gson.Gson
 
 class GameLibraryFragment : Fragment() {
     private lateinit var binding: FragmentGamelibraryBinding
+    private lateinit var adapter: GameLibraryAdapter
+    private var games: MutableList<GameResult> = mutableListOf()
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        adapter = GameLibraryAdapter(games, requireContext())
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -40,5 +57,24 @@ class GameLibraryFragment : Fragment() {
             return@setOnMenuItemClickListener true
 
         }
+        binding.recyclerViewGames.layoutManager = LinearLayoutManager(requireContext())
+        binding.recyclerViewGames.adapter = adapter
+        cargarJuegosDesdeAPI()
+    }
+    private fun cargarJuegosDesdeAPI() {
+        val url = "https://api.rawg.io/api/games?key=8f1d2939357d42f7af531dc43d0e2172&page_size=10"
+        val gson = Gson()
+        val request = JsonObjectRequest(url, { response ->
+            val gameData = gson.fromJson(response.toString(), Game::class.java)
+            games.clear()
+            gameData.results?.let { games.addAll(it) }
+            adapter.notifyDataSetChanged()
+        }, {
+            Snackbar.make(binding.root, "Error al cargar datos", Snackbar.LENGTH_SHORT)
+                .show()
+            it.printStackTrace()
+        })
+
+        Volley.newRequestQueue(requireContext()).add(request)
     }
 }

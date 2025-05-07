@@ -1,10 +1,12 @@
 package com.example.gamershub.model
 
+import com.google.gson.annotations.SerializedName
+
 data class Game(
     val count: Long? = null,
     val next: String? = null,
     val previous: Any? = null,
-    val results: List<Result>? = null,
+    val results: List<GameResult>? = null,
     val seoTitle: String? = null,
     val seoDescription: String? = null,
     val seoKeywords: String? = null,
@@ -36,12 +38,13 @@ data class YearYear (
     val nofollow: Boolean? = null
 )
 
-data class Result (
+data class GameResult (
     val id: Long? = null,
     val slug: String? = null,
     val name: String? = null,
     val released: String? = null,
     val tba: Boolean? = null,
+    @SerializedName("background_image")
     val backgroundImage: String? = null,
     val rating: Double? = null,
     val ratingTop: Long? = null,
