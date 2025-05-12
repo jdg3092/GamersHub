@@ -89,5 +89,13 @@
         <action
             android:id="@+id/action_gameLibraryFragment_to_mainFragment"
             app:destination="@id/mainFragment" />
+        <action
+            android:id="@+id/action_gameLibraryFragment_to_detailsGameFragment"
+            app:destination="@id/detailsGameFragment" />
     </fragment>
+    <fragment
+        tools:layout="@layout/fragment_detailsgame"
+        android:id="@+id/detailsGameFragment"
+        android:name="com.example.gamershub.ui.fragment.DetailsGameFragment"
+        android:label="DetailsGameFragment" />
 </navigation>

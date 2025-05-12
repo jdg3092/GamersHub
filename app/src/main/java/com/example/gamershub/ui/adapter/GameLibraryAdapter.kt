@@ -14,13 +14,21 @@ import com.example.gamershub.R
 import com.example.gamershub.model.GameResult
 
 
-class GameLibraryAdapter(private val games: List<GameResult>, private val context: Context) :
+class GameLibraryAdapter(val games: List<GameResult>, val context: Context, val onItemLongClick: (GameResult) -> Unit) :
     RecyclerView.Adapter<GameLibraryAdapter.MyHolder>() {
 
     inner class MyHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val imgGame: ImageView = itemView.findViewById(R.id.imgGame)
         val textGameName: TextView = itemView.findViewById(R.id.textGameName)
         val textReleaseDate: TextView = itemView.findViewById(R.id.textReleaseDate)
+
+        init{
+            itemView.setOnLongClickListener {
+                onItemLongClick(games[adapterPosition]) // Llamamos al callback cuando se hace una pulsación larga
+                true // Indicamos que hemos manejado el evento
+            }
+
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyHolder {
@@ -40,5 +48,8 @@ class GameLibraryAdapter(private val games: List<GameResult>, private val contex
         Log.d("DEBUG", "Imagen: ${game.backgroundImage}")
         holder.textGameName.text = game.name
         holder.textReleaseDate.text = "Lanzamiento: ${game.released ?: "Fecha no disponible"}"
+
+
+
     }
 }

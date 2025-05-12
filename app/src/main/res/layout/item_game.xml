@@ -13,6 +13,8 @@
         android:orientation="horizontal"
         android:padding="12dp">
 
+
+
         <!-- Imagen del videojuego -->
         <ImageView
             android:id="@+id/imgGame"

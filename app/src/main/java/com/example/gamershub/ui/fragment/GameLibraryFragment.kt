@@ -26,7 +26,9 @@ class GameLibraryFragment : Fragment() {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        adapter = GameLibraryAdapter(games, requireContext())
+        adapter = GameLibraryAdapter(games, requireContext()) { game ->
+            navegarADetalleJuego(game)
+        }
     }
 
     override fun onCreateView(
@@ -77,4 +79,11 @@ class GameLibraryFragment : Fragment() {
 
         Volley.newRequestQueue(requireContext()).add(request)
     }
+    private fun navegarADetalleJuego(game: GameResult) {
+        val bundle = Bundle()
+        game.id?.let { bundle.putLong("game_id", it) }
+        findNavController().navigate(R.id.action_gameLibraryFragment_to_detailsGameFragment, bundle)
+    }
+
+
 }
