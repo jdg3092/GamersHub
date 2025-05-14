@@ -14,7 +14,11 @@ import com.example.gamershub.R
 import com.example.gamershub.model.GameResult
 
 
-class GameLibraryAdapter(val games: List<GameResult>, val context: Context, val onItemLongClick: (GameResult) -> Unit) :
+class GameLibraryAdapter(
+    val games: List<GameResult>,
+    val context: Context,
+    val onItemLongClick: (GameResult) -> Unit
+) :
     RecyclerView.Adapter<GameLibraryAdapter.MyHolder>() {
 
     inner class MyHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -22,7 +26,7 @@ class GameLibraryAdapter(val games: List<GameResult>, val context: Context, val 
         val textGameName: TextView = itemView.findViewById(R.id.textGameName)
         val textReleaseDate: TextView = itemView.findViewById(R.id.textReleaseDate)
 
-        init{
+        init {
             itemView.setOnLongClickListener {
                 onItemLongClick(games[adapterPosition]) // Llamamos al callback cuando se hace una pulsación larga
                 true // Indicamos que hemos manejado el evento
@@ -48,7 +52,6 @@ class GameLibraryAdapter(val games: List<GameResult>, val context: Context, val 
         Log.d("DEBUG", "Imagen: ${game.backgroundImage}")
         holder.textGameName.text = game.name
         holder.textReleaseDate.text = "Lanzamiento: ${game.released ?: "Fecha no disponible"}"
-
 
 
     }
