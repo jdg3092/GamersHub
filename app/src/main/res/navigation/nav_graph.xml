@@ -42,6 +42,12 @@
         <action
             android:id="@+id/action_mainFragment_to_gameLibraryFragment"
             app:destination="@id/gameLibraryFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_gameReleaseFragment"
+            app:destination="@id/gameReleaseFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_gameTrackerFragment"
+            app:destination="@id/gameTrackerFragment" />
     </fragment>
     <dialog
         android:id="@+id/registerDialog"
@@ -98,4 +104,14 @@
         android:id="@+id/detailsGameFragment"
         android:name="com.example.gamershub.ui.fragment.DetailsGameFragment"
         android:label="DetailsGameFragment" />
+    <fragment
+        tools:layout="@layout/fragment_gamerelease"
+        android:id="@+id/gameReleaseFragment"
+        android:name="com.example.gamershub.ui.fragment.GameReleaseFragment"
+        android:label="GameReleaseFragment" />
+    <fragment
+        tools:layout="@layout/fragment_gametracker"
+        android:id="@+id/gameTrackerFragment"
+        android:name="com.example.gamershub.ui.fragment.GameTrackerFragment"
+        android:label="GameTrackerFragment" />
 </navigation>
