@@ -27,7 +27,7 @@ class DetailsGameFragment: Fragment() {
             gameId = it.getLong("game_id")
         }
 
-        // Ahora puedes utilizar el gameId para hacer la solicitud a la API
+        // El gameId para hacer la solicitud a la API
         gameId?.let {
             cargarDetallesDelJuego(it)
         }
@@ -40,7 +40,6 @@ class DetailsGameFragment: Fragment() {
 
         val request = JsonObjectRequest(url, { response ->
             val gameDetail = gson.fromJson(response.toString(), GameResult::class.java)
-            // Aquí puedes actualizar la UI con los detalles del juego
             actualizarUIConDetalles(gameDetail)
         }, {
             // Manejo de errores
@@ -48,7 +47,6 @@ class DetailsGameFragment: Fragment() {
             it.printStackTrace()
         })
 
-        // Añade la solicitud a la cola de Volley
         Volley.newRequestQueue(requireContext()).add(request)
     }
 
