@@ -42,8 +42,24 @@ class RegisterFragment : Fragment() {
             val apellido = binding.editApellido.text.toString()
             val correo = binding.editCorreo.text.toString()
             val pass = binding.editPass.text.toString()
+            val confirmPass = binding.editConfirmarPass.text.toString()
             val telefono = binding.editTelefono.text.toString()
             val direccion = binding.editDireccion.text.toString()
+
+            if (!correo.contains("@")) {
+                Snackbar.make(binding.root, "El correo debe contener '@'", Snackbar.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            if (pass.length < 6) {
+                Snackbar.make(binding.root, "La contraseña debe tener al menos 6 caracteres", Snackbar.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            if (pass != confirmPass) {
+                Snackbar.make(binding.root, "Las contraseñas no coinciden", Snackbar.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
 
             val user = User(nombre, apellido, correo, telefono, direccion)
 
@@ -54,8 +70,7 @@ class RegisterFragment : Fragment() {
                     reference.setValue(user)
                     findNavController().navigate(R.id.action_registerFragment_to_registerDialog)
                 } else {
-                    Snackbar.make(binding.root, "Error en el registro", Snackbar.LENGTH_SHORT)
-                        .show()
+                    Snackbar.make(binding.root, "Error en el registro", Snackbar.LENGTH_SHORT).show()
                 }
             }
         }
