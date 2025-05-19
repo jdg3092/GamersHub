@@ -41,5 +41,12 @@ class GameTrackerFragment : Fragment() {
             return@setOnMenuItemClickListener true
 
         }
+        binding.cardQuieroJugar.setOnClickListener {
+            findNavController().navigate(R.id.action_gameTrackerFragment_to_gameTrackerListFragment)
+
+        }
+
+
+
     }
 }

@@ -117,5 +117,13 @@
         <action
             android:id="@+id/action_gameTrackerFragment_to_mainFragment"
             app:destination="@id/mainFragment" />
+        <action
+            android:id="@+id/action_gameTrackerFragment_to_gameTrackerListFragment"
+            app:destination="@id/gameTrackerListFragment" />
     </fragment>
+    <fragment
+        tools:layout="@layout/fragment_gametrackerlist"
+        android:id="@+id/gameTrackerListFragment"
+        android:name="com.example.gamershub.ui.fragment.GameTrackerListFragment"
+        android:label="GameTrackerListFragment" />
 </navigation>
