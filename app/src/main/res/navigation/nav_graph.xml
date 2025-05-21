@@ -125,5 +125,9 @@
         tools:layout="@layout/fragment_gametrackerlist"
         android:id="@+id/gameTrackerListFragment"
         android:name="com.example.gamershub.ui.fragment.GameTrackerListFragment"
-        android:label="GameTrackerListFragment" />
+        android:label="GameTrackerListFragment" >
+        <action
+            android:id="@+id/action_gameTrackerListFragment_to_detailsGameFragment"
+            app:destination="@id/detailsGameFragment" />
+    </fragment>
 </navigation>

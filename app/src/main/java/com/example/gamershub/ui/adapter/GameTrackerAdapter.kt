@@ -16,29 +16,25 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 
-
-class GameLibraryAdapter(
-    val games: List<GameResult>,
+class GameTrackerAdapter(
+    val games: MutableList<GameResult>,
     val context: Context,
+    val estadoActual: String, // "QuieroJugar", "Jugando", "Terminado"
     val onItemLongClick: (GameResult) -> Unit
-) :
-    RecyclerView.Adapter<GameLibraryAdapter.MyHolder>() {
-    private lateinit var auth: FirebaseAuth
-    private lateinit var database: FirebaseDatabase
-
+) : RecyclerView.Adapter<GameTrackerAdapter.MyHolder>() {
     inner class MyHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val imgGame: ImageView = itemView.findViewById(R.id.imgGame)
         val toolbarGameItem: Toolbar = itemView.findViewById(R.id.toolbarGameItem)
         val textReleaseDate: TextView = itemView.findViewById(R.id.textReleaseDate)
-
         init {
             itemView.setOnLongClickListener {
                 onItemLongClick(games[adapterPosition]) // Llamamos al callback cuando se hace una pulsación larga
                 true // Indicamos que hemos manejado el evento
             }
-            toolbarGameItem.inflateMenu(R.menu.menu_game_item)
+            toolbarGameItem.inflateMenu(R.menu.menu_tracker_item)
 
         }
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyHolder {
@@ -46,7 +42,9 @@ class GameLibraryAdapter(
         return MyHolder(view)
     }
 
-    override fun getItemCount(): Int = games.size
+    override fun getItemCount(): Int {
+        return games.size
+    }
 
     override fun onBindViewHolder(holder: MyHolder, position: Int) {
         val game = games[position]
@@ -58,36 +56,45 @@ class GameLibraryAdapter(
         Log.d("DEBUG", "Imagen: ${game.backgroundImage}")
         holder.toolbarGameItem.title = game.name
         holder.textReleaseDate.text = "Lanzamiento: ${game.released ?: "Fecha no disponible"}"
-
         holder.toolbarGameItem.setOnMenuItemClickListener {
             when (it.itemId) {
-                R.id.addTracker -> {
-                    auth = FirebaseAuth.getInstance()
-                    database =
-                        FirebaseDatabase.getInstance("https://gamershub-5a2e5-default-rtdb.europe-west1.firebasedatabase.app/")
-                    val currentUser = auth.currentUser
-                    val reference = game.id?.let { id -> database.reference
-                        .child("users")
-                        .child(currentUser!!.uid)
-                        .child("GameTracker")
-                        .child("QuieroJugar") // ← Aquí especificas la categoría
-                        .child(id.toString())
-                    }
-                    reference?.setValue(game)?.addOnSuccessListener {
-                        Snackbar.make(holder.itemView, "Añadido a My Game Tracker", Snackbar.LENGTH_SHORT).show()
-
-                    }?.addOnFailureListener {
-                        Snackbar.make(holder.itemView, "Error al guardar en My Game Tracker", Snackbar.LENGTH_SHORT).show()
-
-                    }
-
-                    return@setOnMenuItemClickListener true
+                R.id.moverAJugando -> {
+                    moverJuegoAFirebase(game, "Jugando")
+                    Snackbar.make(
+                        holder.itemView,
+                        "Añadido a Jugando",
+                        Snackbar.LENGTH_SHORT
+                    ).show()
+                    true
                 }
-
+                R.id.moverATerminado -> {
+                    moverJuegoAFirebase(game, "Terminado")
+                    Snackbar.make(
+                        holder.itemView,
+                        "Añadido a Terminado",
+                        Snackbar.LENGTH_SHORT
+                    ).show()
+                    true
+                }
+                else -> false
             }
-            return@setOnMenuItemClickListener true
         }
+    }
+    private fun moverJuegoAFirebase(juego: GameResult, destino: String) {
+        val uid = FirebaseAuth.getInstance().currentUser?.uid ?: return
+        val dbRef = FirebaseDatabase.getInstance("https://gamershub-5a2e5-default-rtdb.europe-west1.firebasedatabase.app/").reference
 
+        val origen = dbRef.child("users").child(uid).child("GameTracker").child(estadoActual).child(juego.id.toString())
+        val destinoRef = dbRef.child("users").child(uid).child("GameTracker").child(destino).child(juego.id.toString())
 
+        destinoRef.setValue(juego).addOnSuccessListener {
+            origen.removeValue().addOnSuccessListener {
+                val index = games.indexOfFirst { it.id == juego.id }
+                if (index != -1) {
+                    games.removeAt(index)
+                    notifyItemRemoved(index)
+                }
+            }
+        }
     }
 }

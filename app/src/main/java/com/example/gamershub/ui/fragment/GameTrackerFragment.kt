@@ -42,8 +42,23 @@ class GameTrackerFragment : Fragment() {
 
         }
         binding.cardQuieroJugar.setOnClickListener {
-            findNavController().navigate(R.id.action_gameTrackerFragment_to_gameTrackerListFragment)
+            val bundle = Bundle().apply {
+                putString("estado", "QuieroJugar")
+            }
+            findNavController().navigate(R.id.action_gameTrackerFragment_to_gameTrackerListFragment, bundle)
+        }
+        binding.cardJugando.setOnClickListener {
+            val bundle = Bundle().apply {
+                putString("estado", "Jugando")
+            }
+            findNavController().navigate(R.id.action_gameTrackerFragment_to_gameTrackerListFragment, bundle)
+        }
 
+        binding.cardTerminado.setOnClickListener {
+            val bundle = Bundle().apply {
+                putString("estado", "Terminado")
+            }
+            findNavController().navigate(R.id.action_gameTrackerFragment_to_gameTrackerListFragment, bundle)
         }
 
 
