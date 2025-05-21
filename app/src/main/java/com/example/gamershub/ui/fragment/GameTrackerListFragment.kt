@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -52,6 +53,18 @@ class GameTrackerListFragment: Fragment() {
         super.onStart()
         binding.recyclerViewGamesTracker.layoutManager = LinearLayoutManager(requireContext())
         binding.recyclerViewGamesTracker.adapter = adapter
+        binding.toolbarGameTracker.inflateMenu(R.menu.menu_mygames)
+        binding.toolbarGameTracker.overflowIcon?.setTint(ContextCompat.getColor(requireContext(), R.color.white))
+        binding.toolbarGameTracker.setOnMenuItemClickListener {
+            when (it.itemId) {
+                R.id.volverGameTracker -> {
+                    findNavController().navigate(R.id.action_gameTrackerListFragment_to_gameTrackerFragment)
+                    return@setOnMenuItemClickListener true
+                }
+
+            }
+            return@setOnMenuItemClickListener true
+        }
         cargarJuegosDesdeFirebase()
     }
 
