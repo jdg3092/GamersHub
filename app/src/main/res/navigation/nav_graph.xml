@@ -86,7 +86,11 @@
         tools:layout="@layout/fragment_forum"
         android:id="@+id/forumFragment"
         android:name="com.example.gamershub.ui.fragment.ForumFragment"
-        android:label="ForumFragment" />
+        android:label="ForumFragment" >
+        <action
+            android:id="@+id/action_forumFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
+    </fragment>
     <fragment
         tools:layout="@layout/fragment_gamelibrary"
         android:id="@+id/gameLibraryFragment"
