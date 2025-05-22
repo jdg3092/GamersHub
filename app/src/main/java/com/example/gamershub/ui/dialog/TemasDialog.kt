@@ -22,13 +22,13 @@ class TemasDialog: DialogFragment() {
             hint = "Escribe el nombre del tema"
             inputType = InputType.TYPE_CLASS_TEXT
         }
-        builder.setTitle("Temas")
+        builder.setTitle("Crea tu tema")
         builder.setView(editText)
-        builder.setPositiveButton("OK"){_,_->
+        builder.setPositiveButton("Crear"){_,_->
             val nombreTema = editText.text.toString().trim()
             if (nombreTema.isNotEmpty()) {
                 listener?.onTemaCreado(nombreTema)
-                Log.d("TemasDialog", "OK pulsado. Tema: $nombreTema")
+                Log.d("TemasDialog", "Crear pulsado. Tema: $nombreTema")
 
             } else {
                 Snackbar.make(requireView(), "El nombre del tema no puede estar vacío", Snackbar.LENGTH_SHORT).show()

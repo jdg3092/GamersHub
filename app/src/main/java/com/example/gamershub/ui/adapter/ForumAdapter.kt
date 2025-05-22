@@ -9,16 +9,22 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.gamershub.R
 import com.example.gamershub.model.Tema
 
-class ForumAdapter(val temas: MutableList<Tema>, val context: Context) :
+class ForumAdapter(
+    val temas: MutableList<Tema>,
+    val context: Context,
+    val onBorrarTema: (Tema) -> Unit
+) :
     RecyclerView.Adapter<ForumAdapter.MyHolder>() {
     inner class MyHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val toolbarTemas: Toolbar = itemView.findViewById(R.id.toolbarTema)
+
         init {
             toolbarTemas.inflateMenu(R.menu.menu_tema)
 
         }
 
     }
+
     override fun getItemCount(): Int {
         return temas.size
     }
@@ -33,11 +39,13 @@ class ForumAdapter(val temas: MutableList<Tema>, val context: Context) :
         holder.toolbarTemas.title = tema.nombre
         holder.toolbarTemas.setOnMenuItemClickListener {
             when (it.itemId) {
-                R.id.menu_editar->{
+                R.id.menu_editar -> {
                     return@setOnMenuItemClickListener true
 
                 }
-                R.id.menu_borrar ->{
+
+                R.id.menu_borrar -> {
+                    onBorrarTema(tema)
                     return@setOnMenuItemClickListener true
                 }
             }
@@ -46,7 +54,6 @@ class ForumAdapter(val temas: MutableList<Tema>, val context: Context) :
         }
 
     }
-
 
 
 }
