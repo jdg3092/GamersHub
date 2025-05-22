@@ -11,7 +11,7 @@
         android:id="@+id/toolbarForum"
         android:backgroundTint="@color/white"
         app:titleTextColor="@color/white"
-        app:title="Game Tracker"
+        app:title="Forum"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"

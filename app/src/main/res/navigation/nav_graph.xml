@@ -112,7 +112,11 @@
         tools:layout="@layout/fragment_gamerelease"
         android:id="@+id/gameReleaseFragment"
         android:name="com.example.gamershub.ui.fragment.GameReleaseFragment"
-        android:label="GameReleaseFragment" />
+        android:label="GameReleaseFragment" >
+        <action
+            android:id="@+id/action_gameReleaseFragment_to_detailsGameFragment"
+            app:destination="@id/detailsGameFragment" />
+    </fragment>
     <fragment
         tools:layout="@layout/fragment_gametracker"
         android:id="@+id/gameTrackerFragment"
