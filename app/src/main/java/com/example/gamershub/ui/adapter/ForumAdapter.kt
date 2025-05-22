@@ -4,7 +4,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
+import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.RecyclerView
 import com.example.gamershub.R
 import com.example.gamershub.model.Tema
@@ -12,7 +12,11 @@ import com.example.gamershub.model.Tema
 class ForumAdapter(val temas: MutableList<Tema>, val context: Context) :
     RecyclerView.Adapter<ForumAdapter.MyHolder>() {
     inner class MyHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val title: TextView = itemView.findViewById(R.id.textTema)
+        val toolbarTemas: Toolbar = itemView.findViewById(R.id.toolbarTema)
+        init {
+            toolbarTemas.inflateMenu(R.menu.menu_tema)
+
+        }
 
     }
     override fun getItemCount(): Int {
@@ -26,7 +30,20 @@ class ForumAdapter(val temas: MutableList<Tema>, val context: Context) :
 
     override fun onBindViewHolder(holder: ForumAdapter.MyHolder, position: Int) {
         val tema = temas[position]
-        holder.title.text = tema.nombre
+        holder.toolbarTemas.title = tema.nombre
+        holder.toolbarTemas.setOnMenuItemClickListener {
+            when (it.itemId) {
+                R.id.menu_editar->{
+                    return@setOnMenuItemClickListener true
+
+                }
+                R.id.menu_borrar ->{
+                    return@setOnMenuItemClickListener true
+                }
+            }
+            return@setOnMenuItemClickListener true
+
+        }
 
     }
 
