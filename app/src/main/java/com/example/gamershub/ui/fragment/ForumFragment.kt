@@ -141,6 +141,11 @@ class ForumFragment : Fragment(), TemasDialog.OnTemaCreadoListener {
             override fun onTemaEditado(tema: Tema, nuevoNombre: String) {
                 val temaRef = database.reference.child("temas").child(tema.id ?: return)
                 temaRef.child("nombre").setValue(nuevoNombre)
+                Snackbar.make(
+                    binding.root,
+                    "Tema editado",
+                    Snackbar.LENGTH_SHORT
+                ).show()
             }
         })
         dialog.show(parentFragmentManager, "EditarTemaDialog")
