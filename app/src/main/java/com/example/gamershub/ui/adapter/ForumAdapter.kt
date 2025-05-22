@@ -12,7 +12,8 @@ import com.example.gamershub.model.Tema
 class ForumAdapter(
     val temas: MutableList<Tema>,
     val context: Context,
-    val onBorrarTema: (Tema) -> Unit
+    val onBorrarTema: (Tema) -> Unit,
+    val onEditarTema: (Tema) -> Unit
 ) :
     RecyclerView.Adapter<ForumAdapter.MyHolder>() {
     inner class MyHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -40,6 +41,7 @@ class ForumAdapter(
         holder.toolbarTemas.setOnMenuItemClickListener {
             when (it.itemId) {
                 R.id.menu_editar -> {
+                    onEditarTema(tema)
                     return@setOnMenuItemClickListener true
 
                 }

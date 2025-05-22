@@ -14,6 +14,7 @@ import com.example.gamershub.R
 import com.example.gamershub.databinding.FragmentForumBinding
 import com.example.gamershub.model.Tema
 import com.example.gamershub.ui.adapter.ForumAdapter
+import com.example.gamershub.ui.dialog.EditarTemaDialog
 import com.example.gamershub.ui.dialog.TemasDialog
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
@@ -32,7 +33,10 @@ class ForumFragment : Fragment(), TemasDialog.OnTemaCreadoListener {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        adapter = ForumAdapter(temas, requireContext()) { tema -> borrarTema(tema) }
+        adapter = ForumAdapter(temas,
+            requireContext(),
+            onEditarTema = { tema -> editarTema(tema) },
+            onBorrarTema = { tema -> borrarTema(tema) })
         auth = FirebaseAuth.getInstance()
         database =
             FirebaseDatabase.getInstance("https://gamershub-5a2e5-default-rtdb.europe-west1.firebasedatabase.app/")
@@ -67,7 +71,7 @@ class ForumFragment : Fragment(), TemasDialog.OnTemaCreadoListener {
 
                 R.id.crearTema -> {
                     val dialog = TemasDialog()
-                    dialog.setListener(this) // ✅ ESTA LÍNEA ES CLAVE
+                    dialog.setListener(this) //
                     dialog.show(parentFragmentManager, "TemasDialog")
                     return@setOnMenuItemClickListener true
                 }
@@ -129,5 +133,18 @@ class ForumFragment : Fragment(), TemasDialog.OnTemaCreadoListener {
             Log.e("ForumFragment", "Error al borrar tema: ${it.message}")
         }
     }
+
+    private fun editarTema(tema: Tema) {
+        val dialog = EditarTemaDialog(tema)
+        dialog.setListener(object : EditarTemaDialog.OnTemaEditadoListener {
+
+            override fun onTemaEditado(tema: Tema, nuevoNombre: String) {
+                val temaRef = database.reference.child("temas").child(tema.id ?: return)
+                temaRef.child("nombre").setValue(nuevoNombre)
+            }
+        })
+        dialog.show(parentFragmentManager, "EditarTemaDialog")
+    }
+
 
 }
