@@ -91,11 +91,12 @@ class ForumFragment : Fragment(), TemasDialog.OnTemaCreadoListener {
     }
 
     override fun onTemaCreado(nombre: String) {
+        // Genera una clave única para el nuevo tema dentro del nodo "temas"
         val temaId = database.reference.child("temas").push().key ?: return
         val tema = Tema(
             id = temaId,
             nombre = nombre,
-            creador = auth.currentUser?.uid ?: "anonimo",
+            creador = auth.currentUser?.uid ?: "anonimo", // Uid del usuario que lo ha creado
             timestamp = System.currentTimeMillis()
         )
 
