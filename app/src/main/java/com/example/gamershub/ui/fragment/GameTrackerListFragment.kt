@@ -24,15 +24,15 @@ class GameTrackerListFragment: Fragment() {
     private var games: MutableList<GameResult> = mutableListOf()
     private lateinit var estado: String
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        estado = arguments?.getString("estado") ?: "QuieroJugar"
-    }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
+        estado = arguments?.getString("estado") ?: "QuieroJugar"
         auth = FirebaseAuth.getInstance()
         database = FirebaseDatabase.getInstance("https://gamershub-5a2e5-default-rtdb.europe-west1.firebasedatabase.app/")
+        adapter = GameTrackerAdapter(games, requireContext(), estado) { game ->
+            navegarADetalleJuego(game)
+        }
 
     }
 
@@ -42,9 +42,6 @@ class GameTrackerListFragment: Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentGametrackerlistBinding.inflate(inflater, container, false)
-        adapter = GameTrackerAdapter(games, requireContext(), estado) { game ->
-            navegarADetalleJuego(game)
-        }
         return binding.root
     }
 

@@ -1,5 +1,6 @@
 package com.example.gamershub.ui.fragment
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -13,27 +14,35 @@ import com.example.gamershub.model.GameResult
 import com.google.android.material.snackbar.Snackbar
 import com.google.gson.Gson
 
-class DetailsGameFragment: Fragment() {
+class DetailsGameFragment : Fragment() {
     private lateinit var binding: FragmentDetailsgameBinding
     private var gameId: Long? = null
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        // Recupera el ID del juego pasado en el Bundle
+        arguments?.let {
+            gameId = it.getLong("game_id")
+        }
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding =  FragmentDetailsgameBinding.inflate(inflater, container, false)
-        // Recupera el ID del juego pasado en el Bundle
-        arguments?.let {
-            gameId = it.getLong("game_id")
-        }
+        binding = FragmentDetailsgameBinding.inflate(inflater, container, false)
+        return binding.root
+    }
 
+    override fun onStart() {
+        super.onStart()
         // El gameId para hacer la solicitud a la API
         gameId?.let {
             cargarDetallesDelJuego(it)
         }
-        return binding.root
-
     }
+
     private fun cargarDetallesDelJuego(gameId: Long) {
         val url = "https://api.rawg.io/api/games/$gameId?key=8f1d2939357d42f7af531dc43d0e2172"
         val gson = Gson()
@@ -43,7 +52,8 @@ class DetailsGameFragment: Fragment() {
             actualizarUIConDetalles(gameDetail)
         }, {
             // Manejo de errores
-            Snackbar.make(requireView(), "Error al cargar los detalles", Snackbar.LENGTH_SHORT).show()
+            Snackbar.make(requireView(), "Error al cargar los detalles", Snackbar.LENGTH_SHORT)
+                .show()
             it.printStackTrace()
         })
 
