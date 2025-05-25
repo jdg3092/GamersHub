@@ -145,3 +145,7 @@ data class Store(
     val store: Genre? = null
 ) : Serializable
 
+data class GameResponse(
+    val results: List<GameResult>?
+)
+
