@@ -11,4 +11,10 @@
         android:title="Eliminar"
         android:icon="@android:drawable/ic_menu_delete"
         app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/ir_chat"
+        android:title="Ir al chat"
+        app:showAsAction="ifRoom"
+        android:icon="@drawable/ic_chat" />"
+
 </menu>

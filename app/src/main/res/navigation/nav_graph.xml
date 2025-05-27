@@ -90,6 +90,9 @@
         <action
             android:id="@+id/action_forumFragment_to_mainFragment"
             app:destination="@id/mainFragment" />
+        <action
+            android:id="@+id/action_forumFragment_to_forumChatFragment"
+            app:destination="@id/forumChatFragment" />
     </fragment>
     <fragment
         tools:layout="@layout/fragment_gamelibrary"
@@ -143,5 +146,14 @@
         <action
             android:id="@+id/action_gameTrackerListFragment_to_gameTrackerFragment"
             app:destination="@id/gameTrackerFragment" />
+    </fragment>
+    <fragment
+        tools:layout="@layout/fragment_forumchat"
+        android:id="@+id/forumChatFragment"
+        android:name="com.example.gamershub.ui.fragment.ForumChatFragment"
+        android:label="ForumChatFragment" >
+        <action
+            android:id="@+id/action_forumChatFragment_to_forumFragment"
+            app:destination="@id/forumFragment" />
     </fragment>
 </navigation>
