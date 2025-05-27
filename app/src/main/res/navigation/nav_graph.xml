@@ -116,6 +116,9 @@
         <action
             android:id="@+id/action_gameReleaseFragment_to_detailsGameFragment"
             app:destination="@id/detailsGameFragment" />
+        <action
+            android:id="@+id/action_gameReleaseFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
     </fragment>
     <fragment
         tools:layout="@layout/fragment_gametracker"

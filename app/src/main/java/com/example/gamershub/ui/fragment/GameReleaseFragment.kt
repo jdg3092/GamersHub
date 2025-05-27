@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -13,7 +14,6 @@ import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import com.example.gamershub.R
 import com.example.gamershub.databinding.FragmentGamereleaseBinding
-import com.example.gamershub.model.Game
 import com.example.gamershub.model.GameResponse
 import com.example.gamershub.model.GameResult
 import com.example.gamershub.ui.adapter.GameReleaseAdapter
@@ -21,7 +21,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.gson.Gson
 
 
-class  GameReleaseFragment : Fragment() {
+class GameReleaseFragment : Fragment() {
 
     private lateinit var binding: FragmentGamereleaseBinding
     private lateinit var adapter: GameReleaseAdapter
@@ -44,8 +44,23 @@ class  GameReleaseFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
+        binding.toolbarGameRelease.inflateMenu(R.menu.menu_gamerelease)
+        binding.toolbarGameRelease.overflowIcon?.setTint(
+            ContextCompat.getColor(
+                requireContext(),
+                R.color.white
+            )
+        )
+        binding.toolbarGameRelease.setOnMenuItemClickListener {
+            when (it.itemId) {
+                R.id.volverMainFragmnet -> {
+                    findNavController().navigate(R.id.action_gameReleaseFragment_to_mainFragment)
+                    return@setOnMenuItemClickListener true
+                }
 
-
+            }
+            return@setOnMenuItemClickListener true
+        }
 
         binding.recyclerViewJuegosRelease.layoutManager = LinearLayoutManager(requireContext())
         binding.recyclerViewJuegosRelease.adapter = adapter
@@ -62,7 +77,8 @@ class  GameReleaseFragment : Fragment() {
     }
 
     private fun buscarJuegosPorFecha(start: String, end: String) {
-        val url = "https://api.rawg.io/api/games?key=8f1d2939357d42f7af531dc43d0e2172&dates=$start,$end&ordering=-released&page_size=40" // Maximo de juegos que permite la API mostrar
+        val url =
+            "https://api.rawg.io/api/games?key=8f1d2939357d42f7af531dc43d0e2172&dates=$start,$end&ordering=-released&page_size=40" // Maximo de juegos que permite la API mostrar
         val gson = Gson()
         val request = JsonObjectRequest(url, { response ->
             Log.d("GameReleaseFragment", "JSON Response: $response")
@@ -76,7 +92,8 @@ class  GameReleaseFragment : Fragment() {
                 adapter.notifyDataSetChanged()
             } catch (e: Exception) {
                 Log.e("GameReleaseFragment", "Error al parsear JSON", e)
-                Snackbar.make(binding.root, "Error al procesar los datos", Snackbar.LENGTH_SHORT).show()
+                Snackbar.make(binding.root, "Error al procesar los datos", Snackbar.LENGTH_SHORT)
+                    .show()
             }
         }, { error ->
             Log.e("GameReleaseFragment", "Error al cargar los juegos", error)

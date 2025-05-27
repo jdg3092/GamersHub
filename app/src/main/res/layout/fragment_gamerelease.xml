@@ -9,7 +9,7 @@
 
     <!-- Toolbar -->
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbarGameLibrary"
+        android:id="@+id/toolbarGameRelease"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:backgroundTint="@color/white"
@@ -23,27 +23,27 @@
         android:id="@+id/etFechaInicio"
         android:layout_width="166dp"
         android:layout_height="52dp"
-        android:layout_marginTop="44dp"
+        android:layout_marginTop="16dp"
         android:hint="Fecha Inicio"
         android:textColorHint="@color/white"
         android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbarGameLibrary" />
+        app:layout_constraintTop_toBottomOf="@+id/toolbarGameRelease" />
 
     <EditText
         android:id="@+id/etFechaFin"
         android:layout_width="166dp"
         android:layout_height="52dp"
-        android:layout_marginTop="44dp"
+        android:layout_marginTop="16dp"
         android:hint="Fecha Fin"
         android:textColorHint="@color/white"
         android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.934"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbarGameLibrary" />
+        app:layout_constraintTop_toBottomOf="@+id/toolbarGameRelease" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewJuegosRelease"
