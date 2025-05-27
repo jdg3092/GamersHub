@@ -6,24 +6,28 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.gamershub.R
 import com.example.gamershub.model.GameResult
+import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.FirebaseDatabase
 
 class GameReleaseAdapter(
     private val games: List<GameResult>,
     private val context: Context,
     private val onLongClick: (GameResult) -> Unit
 ) : RecyclerView.Adapter<GameReleaseAdapter.GameViewHolder>() {
+    private lateinit var auth: FirebaseAuth
+    private lateinit var database: FirebaseDatabase
 
     inner class GameViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val imgGame: ImageView = itemView.findViewById(R.id.imgGame)
-        val tvGameName: TextView = itemView.findViewById(R.id.textTitle)
+        val tvGameName: Toolbar = itemView.findViewById(R.id.toolbarGameReleaseItem)
         val tvReleaseDate: TextView = itemView.findViewById(R.id.textReleaseDate)
-        val tvPlatforms: TextView = itemView.findViewById(R.id.textPlatforms)
-        val tvGenres: TextView = itemView.findViewById(R.id.textGenres)
-        val tvRating: TextView = itemView.findViewById(R.id.textRating)
+
 
         init {
             itemView.setOnLongClickListener {
@@ -31,6 +35,7 @@ class GameReleaseAdapter(
                 onLongClick(game)
                 true
             }
+            tvGameName.inflateMenu(R.menu.menu_game_item)
         }
     }
 
@@ -45,18 +50,37 @@ class GameReleaseAdapter(
 
         Glide.with(context).load(game.backgroundImage).into(holder.imgGame)
 
-        holder.tvGameName.text = game.name ?: "Sin nombre"
+        holder.tvGameName.title = game.name ?: "Sin nombre"
         holder.tvReleaseDate.text = "Lanzamiento: ${game.released ?: "N/D"}"
+        holder.tvGameName.setOnMenuItemClickListener {
+            when (it.itemId) {
+                R.id.addTracker -> {
+                    auth = FirebaseAuth.getInstance()
+                    database =
+                        FirebaseDatabase.getInstance("https://gamershub-5a2e5-default-rtdb.europe-west1.firebasedatabase.app/")
+                    val currentUser = auth.currentUser
+                    val reference = game.id?.let { id -> database.reference
+                        .child("users")
+                        .child(currentUser!!.uid)
+                        .child("GameTracker")
+                        .child("QuieroJugar") // ← Aquí especificas la categoría
+                        .child(id.toString())
+                    }
+                    reference?.setValue(game)?.addOnSuccessListener {
+                        Snackbar.make(holder.itemView, "Añadido a My Game Tracker", Snackbar.LENGTH_SHORT).show()
 
-        val plataformas = game.platforms
-            ?.mapNotNull { it.platform?.name }
-            ?.joinToString(", ") ?: "N/D"
-        holder.tvPlatforms.text = "Plataformas: $plataformas"
+                    }?.addOnFailureListener {
+                        Snackbar.make(holder.itemView, "Error al guardar en My Game Tracker", Snackbar.LENGTH_SHORT).show()
 
-        val generos = game.genres?.mapNotNull { it.name }?.joinToString(", ") ?: "N/D"
-        holder.tvGenres.text = "Géneros: $generos"
+                    }
 
-        holder.tvRating.text = "Rating: ${game.rating ?: 0.0}"
+                    return@setOnMenuItemClickListener true
+                }
+
+            }
+            return@setOnMenuItemClickListener true
+        }
+
     }
 
     override fun getItemCount(): Int = games.size

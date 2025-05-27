@@ -31,15 +31,15 @@
             android:gravity="center_vertical"
             android:orientation="vertical">
 
-            <!-- Título del juego -->
-            <TextView
-                android:id="@+id/textTitle"
-                android:layout_width="wrap_content"
+            <!-- Título del juego android:id="@+id/textTitle" -->
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbarGameReleaseItem"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Título del juego"
-                android:textStyle="bold"
-                android:textSize="16sp"
-                android:textColor="@android:color/black" />
+                android:minHeight="?attr/actionBarSize"
+                android:titleTextColor="@android:color/white"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+                app:title="Game" />
 
             <!-- Fecha de lanzamiento -->
             <TextView
@@ -49,37 +49,8 @@
                 android:layout_marginTop="4dp"
                 android:text="Lanzamiento: 2024-01-01"
                 android:textSize="14sp"
-                android:textColor="@android:color/darker_gray" />
-
-            <!-- Plataformas -->
-            <TextView
-                android:id="@+id/textPlatforms"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:text="Plataformas: PC, PS5"
-                android:textSize="14sp"
                 android:textColor="@android:color/black" />
 
-            <!-- Géneros -->
-            <TextView
-                android:id="@+id/textGenres"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="2dp"
-                android:text="Géneros: Action, RPG"
-                android:textSize="14sp"
-                android:textColor="@android:color/black" />
-
-            <!-- Rating -->
-            <TextView
-                android:id="@+id/textRating"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="2dp"
-                android:text="Rating: 4.5"
-                android:textSize="14sp"
-                android:textColor="@android:color/black" />
         </LinearLayout>
     </LinearLayout>
 </androidx.cardview.widget.CardView>

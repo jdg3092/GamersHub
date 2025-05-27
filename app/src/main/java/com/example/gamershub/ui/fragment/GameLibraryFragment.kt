@@ -91,7 +91,7 @@ class GameLibraryFragment : Fragment() {
 
     private fun cargarJuegosDesdeAPI() {
         val url =
-            "https://api.rawg.io/api/games?key=8f1d2939357d42f7af531dc43d0e2172&page_size=50" // 50 juegos
+            "https://api.rawg.io/api/games?key=8f1d2939357d42f7af531dc43d0e2172&page_size=40" // Maximo de juegos que permite la API mostrar
         val gson = Gson()
         val request = JsonObjectRequest(url, { response ->
 

@@ -21,7 +21,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.gson.Gson
 
 
-class GameReleaseFragment : Fragment() {
+class  GameReleaseFragment : Fragment() {
 
     private lateinit var binding: FragmentGamereleaseBinding
     private lateinit var adapter: GameReleaseAdapter
@@ -62,7 +62,7 @@ class GameReleaseFragment : Fragment() {
     }
 
     private fun buscarJuegosPorFecha(start: String, end: String) {
-        val url = "https://api.rawg.io/api/games?key=8f1d2939357d42f7af531dc43d0e2172&dates=$start,$end&ordering=-released&page_size=100"
+        val url = "https://api.rawg.io/api/games?key=8f1d2939357d42f7af531dc43d0e2172&dates=$start,$end&ordering=-released&page_size=40" // Maximo de juegos que permite la API mostrar
         val gson = Gson()
         val request = JsonObjectRequest(url, { response ->
             Log.d("GameReleaseFragment", "JSON Response: $response")
