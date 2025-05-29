@@ -155,5 +155,16 @@
         <action
             android:id="@+id/action_forumChatFragment_to_forumFragment"
             app:destination="@id/forumFragment" />
+        <action
+            android:id="@+id/action_forumChatFragment_to_editarMensajeDialogo"
+            app:destination="@id/editarMensajeDialogo" />
     </fragment>
+    <dialog
+        android:id="@+id/editarMensajeDialogo"
+        android:name="com.example.gamershub.ui.dialog.EditarMensajeDialogo"
+        android:label="EditarMensajeDialogo" >
+        <action
+            android:id="@+id/action_editarMensajeDialogo_to_forumChatFragment"
+            app:destination="@id/forumChatFragment" />
+    </dialog>
 </navigation>

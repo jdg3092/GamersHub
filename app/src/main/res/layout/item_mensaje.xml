@@ -14,24 +14,24 @@
         android:orientation="vertical"
         android:padding="8dp">
 
-        <TextView
-            android:id="@+id/textAutor"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Usuario"
-            android:textStyle="bold"
-            android:textSize="14sp"
-            android:textColor="@android:color/darker_gray"/>
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/itemToolbar"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:titleTextColor="@android:color/darker_gray"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+            app:title="Email"
+            />
 
         <!-- Mensaje -->
         <TextView
             android:id="@+id/textMensaje"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
             android:text="Este es un mensaje de prueba."
-            android:textSize="20sp"
             android:textColor="@android:color/black"
-            android:layout_marginTop="4dp"/>
+            android:textSize="20sp" />
 
     </LinearLayout>
 

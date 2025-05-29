@@ -35,7 +35,7 @@ class ForumChatFragment : Fragment() {
         auth = FirebaseAuth.getInstance()
         database =
             FirebaseDatabase.getInstance("https://gamershub-5a2e5-default-rtdb.europe-west1.firebasedatabase.app/")
-        adapter = ForumChatAdapter(mensajes, requireContext())
+        adapter = ForumChatAdapter(mensajes, requireContext(), auth, temaId!!)
 
     }
 
@@ -89,7 +89,10 @@ class ForumChatFragment : Fragment() {
                 mensajes.clear()
                 for (mensajeSnap in snapshot.children) {
                     val mensaje = mensajeSnap.getValue(Mensaje::class.java)
-                    if (mensaje != null) mensajes.add(mensaje)
+                    if (mensaje != null) {
+                        mensaje.key = mensajeSnap.key ?: ""
+                        mensajes.add(mensaje)
+                    }
                 }
                 adapter.notifyDataSetChanged()
                 binding.recyclerMensajes.scrollToPosition(mensajes.size - 1)
