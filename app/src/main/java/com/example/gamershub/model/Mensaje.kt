@@ -6,5 +6,5 @@ data class Mensaje(
     val autor: String = "",
     val texto: String = "",
     val timestamp: Long = 0,
-    @get:Exclude val key: String = ""
+    @get:Exclude var key: String = ""
 )

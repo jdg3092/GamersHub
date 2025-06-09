@@ -1,13 +1,10 @@
 package com.example.gamershub.ui.dialog
 
 import android.app.Dialog
-import android.content.Context
 import android.os.Bundle
 import android.widget.EditText
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
-import androidx.navigation.fragment.findNavController
-import com.example.gamershub.R
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.database.FirebaseDatabase
 
