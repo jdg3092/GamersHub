@@ -31,7 +31,7 @@ class GameTrackerAdapter(
                 onItemLongClick(games[adapterPosition]) // Llamamos al callback cuando se hace una pulsación larga
                 true // Indicamos que hemos manejado el evento
             }
-            toolbarGameItem.inflateMenu(R.menu.menu_tracker_item)
+            // toolbarGameItem.inflateMenu(R.menu.menu_tracker_item)
 
         }
 
@@ -53,9 +53,28 @@ class GameTrackerAdapter(
             .placeholder(R.drawable.ic_placeholder_game)
             .error(R.drawable.ic_placeholder_game)
             .into(holder.imgGame)
+
+        holder.toolbarGameItem.menu.clear()
+
+        when (estadoActual) {
+            "QuieroJugar" -> {
+                holder.toolbarGameItem.inflateMenu(R.menu.menu_tracker_item) // Tiene ambas
+            }
+            "Jugando" -> {
+                holder.toolbarGameItem.inflateMenu(R.menu.menu_tracker_item_terminado)
+                 // Solo opción Terminado
+            }
+            "Terminado" -> {
+                holder.toolbarGameItem.inflateMenu(R.menu.menu_tracker_item_jugando)
+                 // Solo opción Jugando
+            }
+        }
+
         Log.d("DEBUG", "Imagen: ${game.backgroundImage}")
+
         holder.toolbarGameItem.title = game.name
         holder.textReleaseDate.text = "Lanzamiento: ${game.released ?: "Fecha no disponible"}"
+
         holder.toolbarGameItem.setOnMenuItemClickListener {
             when (it.itemId) {
                 R.id.moverAJugando -> {
